@@ -57,7 +57,17 @@
                                 <div class="p-2">
                                   <form action="{% url 'register' %}" method="post">
                                     {% csrf_token %}
-                          
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">Refferer Username</label>
+                                        <input
+                                        type="text"
+                                        name="ref_username"
+                                        placeholder="username"
+                                        id="r_username"
+                                        value="{{ref}}"
+                                        class="form-control form-control-sm"
+                                      />
+                                    </div>
                                     {% include 'partials/_messages.html' %}
                                     <div class="form-group mb-3">
                                       <label for="userpassword" class="form-label">username</label>

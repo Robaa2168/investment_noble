@@ -51,7 +51,10 @@ class UsernameValidationView(View):
 
 class RegistrationView(View):
     def get(self, request):
-        return render(request, 'authentication/register.html')
+        print(self.request.GET.get('ref'))
+        ref = self.request.GET.get('ref') or ''
+        
+        return render(request, template_name='authentication/register.html', context = {'ref': ref})
 
     def post(self, request):
         # GET USER DATA
@@ -59,7 +62,8 @@ class RegistrationView(View):
         # create a user account
 
         username = request.POST['username']
-       # phone = request.POST['phone']
+        phone = request.POST['phone']
+        ref_username = request.POST['ref_username']
         email = request.POST['email']
         password = request.POST['password']
 
@@ -77,6 +81,9 @@ class RegistrationView(View):
                 user.set_password(password)
                 user.is_active = False
                 user.save()
+                user.userprofile.phone_number=phone
+                user.userprofile.refferer=ref_username
+                user.userprofile.save()
                 current_site = get_current_site(request)
                 email_body = {
                     'user': user,

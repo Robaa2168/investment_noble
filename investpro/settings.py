@@ -77,10 +77,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'investpro.wsgi.application'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'pesaclub',
+        'USER': 'root', 
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',   #my port is 3306
     }
 }
 
@@ -112,7 +122,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+USE_TZ = True
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 

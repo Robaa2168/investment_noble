@@ -84,7 +84,8 @@
 
                                     <div class="tab-content crypto-buy-sell-nav-content p-4">
                                         <div class="tab-pane active" id="buy" role="tabpanel">
-                                            <form>
+                                            <form action="{% url 'makeinvetment'%}" method="POST">
+                                                {% csrf_token %}
                                                 <div class="mb-2">
                                                     <label>Currency :</label>
 
@@ -193,11 +194,20 @@
 
 
                                                 <div class="mb-3">
-                                                    <label>purchase here :</label>
-                                                    <input type="text" class="form-control">
+                                                    <label>Amount</label>
+                                                    <input type="text" name="amount" class="form-control">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label>Period</label>
+                                                    <select class="form-select" name="period" aria-label="Default select example">
+                                                        <option selected>Select Period</option>
+                                                        <option value="24hrs">24 Hrs</option>
+                                                        <option value="4days">4 Days</option>
+                                                        <option value="7days">7 Days</option>
+                                                      </select>
                                                 </div>
                                                 <div class="text-center mt-4">
-                                                    <button type="button" class="btn btn-success">Buy shares
+                                                    <button type="submit" class="btn btn-success">Buy shares
                                                         </button>
                                                 </div>
                                             </form>
@@ -308,9 +318,10 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label>purchase here :</label>
+                                                    <label>Amount :</label>
                                                     <input type="text" class="form-control">
                                                 </div>
+                                                
                                                 <div class="text-center mt-4">
                                                     <button type="button" class="btn btn-danger">Sell 
                                                         </button>
