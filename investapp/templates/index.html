@@ -192,7 +192,7 @@
                                                     </div>
                                                 </div>
 
-
+                                                    {% if request.user.userprofile.can_access_features == True  %}
                                                 <div class="mb-3">
                                                     <label>Amount</label>
                                                     <input type="text" name="amount" class="form-control">
@@ -210,6 +210,15 @@
                                                     <button type="submit" class="btn btn-success">Buy shares
                                                         </button>
                                                 </div>
+
+                                                {% else %}
+                                                <div class="alert alert-warning">
+                                                    <h3 class="text-center">You cannot make investiments because you are not eligible.</h3>
+                                                    <div class="my-2 px-2 d-flex justify-content-center">
+                                                        <a href="deposit/" class="btn btn-primary round">Activate account</a>
+                                                    </div>
+                                                </div>
+                                                {% endif %}
                                             </form>
                                         </div>
 
@@ -329,6 +338,39 @@
                                             </form>
                                         </div>
 
+
+                                    </div>
+                                    <div class="container">
+                                        <table class="table">
+                                            <thead class="thead-dark">
+                                              <tr>
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Investment amount</th>
+                                                <th scope="col">Investment date</th>
+                                                <th scope="col">Investment period</th>
+                                                <th scope="col">Investment maturity</th>
+                                                <th scope="col">Investment earnings</th>
+                                                <th scope="col">Investment status</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                          
+                                                {% for investment in investments %}
+                                              <tr>
+                                                <th scope="row">_</th>
+                                                <td> KES {{investment.amount}} </td>
+                                                <td> {{investment.invest_date}} </td>
+                                                <td> {{investment.period}} </td>
+                                                <td> {{investment.due_date}} </td>
+                                                <td> KES {{investment.earnings}} </td>
+                                                <td> {{investment.status}} </td>
+                                                </tr>
+
+                                                {% endfor %}
+                                                
+
+                                            </tbody>
+                                            </table>
                                     </div>
                                 </div>
 

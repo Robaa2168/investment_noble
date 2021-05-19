@@ -81,6 +81,7 @@ class RegistrationView(View):
                 user.set_password(password)
                 user.is_active = False
                 user.save()
+                user.userprofile.username=username
                 user.userprofile.phone_number=phone
                 user.userprofile.refferer=ref_username
                 user.userprofile.save()

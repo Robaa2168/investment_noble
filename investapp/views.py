@@ -16,11 +16,15 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/login')
-def index(request, ref=None):
-     print(ref)
-     return render(request, 'index.html')
+def index(request):
+     investments= Investiments.objects.filter(user=request.user)
+     return render(request, template_name='index.html', context={'investments':investments})
 
-# Sign Up View
+
+def activateaccount(request):
+     return render(request, template_name='dashboard.html')
+
+
 def makeInvestment(request):
      if request.method == "POST":
           period = request.POST.get("period")
@@ -43,7 +47,7 @@ def makeInvestment(request):
 
           per_ = (100 + percent_) / 100
           earnings =  per_ * int(amt)
-          investment=Investiments.objects.create(invoicce="invoice_1", user=request.user, amount=request.POST.get("amount"), earnings=earnings, phone_number=request.user.userprofile.phone_number, due_date=future_date_and_time)
+          investment=Investiments.objects.create(invoicce="invoice_1", user=request.user, amount=request.POST.get("amount"), control_balance=request.POST.get("amount"), earnings=earnings, phone_number=request.user.userprofile.phone_number, due_date=future_date_and_time, invest_date=current_date_and_time, period=period, percent=percent_)
           i_ = investment.save()
           print(i_)
           if i_ == True:

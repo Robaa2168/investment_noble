@@ -14,6 +14,10 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, default=None, on_delete=models.CASCADE, blank=True, null=True)
     unique_url = models.CharField(default=random_string, max_length=10)
     phone_number = models.CharField(max_length=14, blank=True)
+    account_balance = models.TextField(max_length=6, blank=True)
+    invest_balance = models.TextField(max_length=6, blank=True)
+    reg_fee = models.TextField(max_length=6, blank=True)
+    can_access_features =models.BooleanField(default=False)
     alt_phone_number = models.CharField(max_length=14, blank=True)
     profile_pic_url = models.CharField(max_length=14, blank=True)
     refferer = models.TextField(max_length=20, default='')
@@ -38,9 +42,14 @@ class Investiments(models.Model):
     amount = models.TextField(max_length=20)
     earnings = models.TextField(max_length=20)
     phone_number = models.TextField(max_length=20)
+    invest_date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     due_date = models.DateTimeField(blank=True, null=True)
-    # period
-    # percent_
+    invest_date = models.DateTimeField(blank=True, null=True)
+    period = models.TextField(default='', blank=True)
+    percent = models.TextField(default='', blank=True)
+    status = models.TextField(default='pending', blank=True)
+    control_balance = models.TextField(default='', max_length=20)
+
 
 
 class Withdrawals(models.Model):
